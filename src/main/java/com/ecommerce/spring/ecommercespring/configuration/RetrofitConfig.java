@@ -1,5 +1,6 @@
 package com.ecommerce.spring.ecommercespring.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,10 +12,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Configuration
 public class RetrofitConfig {
 
+  @Value("${FAKE_STORE_API_URL}")
+  private String url;
+
   @Bean
   public Retrofit retrofit() {
     return new Retrofit.Builder()
-      .baseUrl("https://fakestoreapi.com")
+      .baseUrl(url)
       .addConverterFactory(GsonConverterFactory.create())
       .build();
   }

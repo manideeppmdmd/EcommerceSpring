@@ -1,6 +1,7 @@
 package com.ecommerce.spring.ecommercespring.services;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,12 @@ public class FakeStoreProductService implements IProductService {
   }
 
   @Override
-  public ProductDTO getAllProducts() throws IOException {
+  public List<ProductDTO> getAllProducts() throws IOException {
     return this.productGateway.getAllProducts();
+  }
+
+  @Override
+  public ProductDTO getProduct(String id) throws IOException {
+    return this.productGateway.getProduct(id);
   }
 }

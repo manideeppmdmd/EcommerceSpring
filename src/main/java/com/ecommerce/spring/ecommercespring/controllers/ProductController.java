@@ -1,9 +1,11 @@
 package com.ecommerce.spring.ecommercespring.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +20,13 @@ public class ProductController {
   private IProductService productService;
 
   @GetMapping
-  public ProductDTO getProducts() throws IOException {
+  public List<ProductDTO> getProducts() throws IOException {
     return productService.getAllProducts();
+  }
+
+  @GetMapping("/{id}")
+  public ProductDTO getProduct(@PathVariable("id") String id)
+    throws IOException {
+    return productService.getProduct(id);
   }
 }
