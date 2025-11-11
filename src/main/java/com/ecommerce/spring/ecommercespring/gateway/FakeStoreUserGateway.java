@@ -1,15 +1,15 @@
 package com.ecommerce.spring.ecommercespring.gateway;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Component;
-
 import com.ecommerce.spring.ecommercespring.dto.FakeStoreUserResponseDTO;
 import com.ecommerce.spring.ecommercespring.dto.UserDTO;
 import com.ecommerce.spring.ecommercespring.gateway.api.FakeStoreUserAPI;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
 @Component
+@Primary
 public class FakeStoreUserGateway implements IUserGateway {
 
   private final FakeStoreUserAPI fakeStoreUserAPI;

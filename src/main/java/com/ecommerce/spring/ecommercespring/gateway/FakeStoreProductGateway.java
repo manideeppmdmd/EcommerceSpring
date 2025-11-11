@@ -3,6 +3,7 @@ package com.ecommerce.spring.ecommercespring.gateway;
 import com.ecommerce.spring.ecommercespring.dto.FakeStoreProductResponseDTO;
 import com.ecommerce.spring.ecommercespring.dto.ProductDTO;
 import com.ecommerce.spring.ecommercespring.gateway.api.FakeStoreProductAPI;
+import com.ecommerce.spring.mappers.GetAllProductsMapper;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -29,16 +30,7 @@ public class FakeStoreProductGateway implements IProductGateway {
 
     List<ProductDTO> products = response
       .stream()
-      .map(product ->
-        ProductDTO.builder()
-          .id(product.getId())
-          .title(product.getTitle())
-          .price(product.getPrice())
-          .description(product.getDescription())
-          .category(product.getCategory())
-          .image(product.getImage())
-          .build()
-      )
+      .map(GetAllProductsMapper::mapToProductDTO)
       .collect(Collectors.toList());
 
     return products;
@@ -49,14 +41,7 @@ public class FakeStoreProductGateway implements IProductGateway {
     FakeStoreProductResponseDTO response =
       this.fakeStoreProductAPI.getFakeProduct(id).execute().body();
 
-    ProductDTO product = ProductDTO.builder()
-      .id(response.getId())
-      .title(response.getTitle())
-      .price(response.getPrice())
-      .description(response.getDescription())
-      .category(response.getCategory())
-      .image(response.getImage())
-      .build();
+    ProductDTO product = GetAllProductsMapper.mapToProductDTO(response);
 
     return product;
   }
