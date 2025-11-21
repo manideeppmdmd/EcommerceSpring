@@ -1,12 +1,10 @@
 package com.ecommerce.spring.ecommercespring.services;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.ecommerce.spring.ecommercespring.dto.ProductDTO;
 import com.ecommerce.spring.ecommercespring.gateway.IProductGateway;
+import java.io.IOException;
+import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class FakeStoreProductService implements IProductService {
@@ -23,7 +21,13 @@ public class FakeStoreProductService implements IProductService {
   }
 
   @Override
-  public ProductDTO getProduct(String id) throws IOException {
+  public ProductDTO getProduct(Long id) throws IOException {
     return this.productGateway.getProduct(id);
+  }
+
+  @Override
+  public ProductDTO create(ProductDTO dto) throws IOException {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'create'");
   }
 }

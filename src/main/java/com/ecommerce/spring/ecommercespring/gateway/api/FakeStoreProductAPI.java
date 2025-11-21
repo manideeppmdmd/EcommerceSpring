@@ -1,11 +1,8 @@
 package com.ecommerce.spring.ecommercespring.gateway.api;
 
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import com.ecommerce.spring.ecommercespring.dto.FakeStoreProductResponseDTO;
-
+import java.util.List;
+import org.springframework.stereotype.Component;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -16,5 +13,5 @@ public interface FakeStoreProductAPI {
   Call<List<FakeStoreProductResponseDTO>> getAllFakeProducts();
 
   @GET("/products/{id}")
-  Call<FakeStoreProductResponseDTO> getFakeProduct(@Path("id") String id);
+  Call<FakeStoreProductResponseDTO> getFakeProduct(@Path("id") Long id);
 }

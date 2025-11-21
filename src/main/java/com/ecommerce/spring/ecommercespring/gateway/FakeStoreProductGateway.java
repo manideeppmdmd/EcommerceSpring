@@ -3,7 +3,7 @@ package com.ecommerce.spring.ecommercespring.gateway;
 import com.ecommerce.spring.ecommercespring.dto.FakeStoreProductResponseDTO;
 import com.ecommerce.spring.ecommercespring.dto.ProductDTO;
 import com.ecommerce.spring.ecommercespring.gateway.api.FakeStoreProductAPI;
-import com.ecommerce.spring.mappers.GetAllProductsMapper;
+import com.ecommerce.spring.ecommercespring.mappers.GetAllProductsMapper;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +37,7 @@ public class FakeStoreProductGateway implements IProductGateway {
   }
 
   @Override
-  public ProductDTO getProduct(String id) throws IOException {
+  public ProductDTO getProduct(Long id) throws IOException {
     FakeStoreProductResponseDTO response =
       this.fakeStoreProductAPI.getFakeProduct(id).execute().body();
 

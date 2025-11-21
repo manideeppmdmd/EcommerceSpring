@@ -1,4 +1,4 @@
-package com.ecommerce.spring.mappers;
+package com.ecommerce.spring.ecommercespring.mappers;
 
 import com.ecommerce.spring.ecommercespring.dto.FakeStoreProductResponseDTO;
 import com.ecommerce.spring.ecommercespring.dto.ProductDTO;
