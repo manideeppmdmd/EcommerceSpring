@@ -1,6 +1,7 @@
 package com.ecommerce.spring.ecommercespring.services;
 
 import com.ecommerce.spring.ecommercespring.dto.ProductDTO;
+import com.ecommerce.spring.ecommercespring.dto.ProductWithCategoryDTO;
 import com.ecommerce.spring.ecommercespring.gateway.IProductGateway;
 import java.io.IOException;
 import java.util.List;
@@ -29,5 +30,13 @@ public class FakeStoreProductService implements IProductService {
   public ProductDTO create(ProductDTO dto) throws IOException {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'create'");
+  }
+
+  @Override
+  public ProductWithCategoryDTO getProductWithCategory(Long id) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException(
+      "Unimplemented method 'getProductWithCategory'"
+    );
   }
 }

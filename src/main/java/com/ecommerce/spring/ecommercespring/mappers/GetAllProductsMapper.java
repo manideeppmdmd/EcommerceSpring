@@ -17,7 +17,7 @@ public class GetAllProductsMapper {
       .title(product.getTitle())
       .price(product.getPrice())
       .description(product.getDescription())
-      .category(product.getCategory())
+      //.categoryId(product.getCategory())
       .image(product.getImage())
       .build();
   }

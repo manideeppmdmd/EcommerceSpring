@@ -1,8 +1,11 @@
 package com.ecommerce.spring.ecommercespring.services;
 
 import com.ecommerce.spring.ecommercespring.dto.ProductDTO;
+import com.ecommerce.spring.ecommercespring.dto.ProductWithCategoryDTO;
+import com.ecommerce.spring.ecommercespring.entity.Category;
 import com.ecommerce.spring.ecommercespring.entity.Product;
 import com.ecommerce.spring.ecommercespring.mappers.ProductMapper;
+import com.ecommerce.spring.ecommercespring.repository.CategoryRepository;
 import com.ecommerce.spring.ecommercespring.repository.ProductRepository;
 import java.io.IOException;
 import java.util.List;
@@ -14,9 +17,11 @@ import org.springframework.stereotype.Service;
 public class ProductService implements IProductService {
 
   private final ProductRepository repo;
+  private final CategoryRepository cateRepo;
 
-  public ProductService(ProductRepository _repo) {
+  public ProductService(ProductRepository _repo, CategoryRepository _cateRepo) {
     this.repo = _repo;
+    this.cateRepo = _cateRepo;
   }
 
   @Override
@@ -45,8 +50,23 @@ public class ProductService implements IProductService {
 
   @Override
   public ProductDTO create(ProductDTO dto) throws IOException {
-    Product saved = repo.save(ProductMapper.toEntity(dto));
+    Category category =
+      this.cateRepo.findById(dto.getCategoryId()).orElseThrow(() ->
+          new IOException("Category ID is invalid")
+        );
+    Product saved = repo.save(ProductMapper.toEntity(dto, category));
 
     return ProductMapper.toDto(saved);
+  }
+
+  @Override
+  public ProductWithCategoryDTO getProductWithCategory(Long id)
+    throws Exception {
+    Product product =
+      this.repo.findById(id).orElseThrow(() ->
+          new Exception("No product with Id: " + id)
+        );
+
+    return ProductMapper.toProductWithCategory(product);
   }
 }

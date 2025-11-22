@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductDTO {
+public class ProductWithCategoryDTO {
 
   private Integer id;
   private String title;
@@ -20,5 +20,5 @@ public class ProductDTO {
 
   private String image;
 
-  private Long categoryId;
+  private CategoryDTO category;
 }
