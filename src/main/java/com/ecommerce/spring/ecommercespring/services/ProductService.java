@@ -4,6 +4,8 @@ import com.ecommerce.spring.ecommercespring.dto.ProductDTO;
 import com.ecommerce.spring.ecommercespring.dto.ProductWithCategoryDTO;
 import com.ecommerce.spring.ecommercespring.entity.Category;
 import com.ecommerce.spring.ecommercespring.entity.Product;
+import com.ecommerce.spring.ecommercespring.exceptions.CategoryInvalidException;
+import com.ecommerce.spring.ecommercespring.exceptions.ProductNotFoundException;
 import com.ecommerce.spring.ecommercespring.mappers.ProductMapper;
 import com.ecommerce.spring.ecommercespring.repository.CategoryRepository;
 import com.ecommerce.spring.ecommercespring.repository.ProductRepository;
@@ -35,7 +37,7 @@ public class ProductService implements IProductService {
   }
 
   @Override
-  public ProductDTO getProduct(Long id) throws IOException {
+  public ProductDTO getProduct(Long id) {
     // return repo
     //   .findById(id)
     //   .map(ProductMapper::toDto)
@@ -43,16 +45,16 @@ public class ProductService implements IProductService {
 
     Product product = repo
       .findById(id)
-      .orElseThrow(() -> new IOException("Product not found"));
+      .orElseThrow(() -> new ProductNotFoundException("Product not found"));
 
     return ProductMapper.toDto(product);
   }
 
   @Override
-  public ProductDTO create(ProductDTO dto) throws IOException {
+  public ProductDTO create(ProductDTO dto) {
     Category category =
       this.cateRepo.findById(dto.getCategoryId()).orElseThrow(() ->
-          new IOException("Category ID is invalid")
+          new CategoryInvalidException("Category ID is invalid")
         );
     Product saved = repo.save(ProductMapper.toEntity(dto, category));
 
@@ -60,11 +62,10 @@ public class ProductService implements IProductService {
   }
 
   @Override
-  public ProductWithCategoryDTO getProductWithCategory(Long id)
-    throws Exception {
+  public ProductWithCategoryDTO getProductWithCategory(Long id) {
     Product product =
       this.repo.findById(id).orElseThrow(() ->
-          new Exception("No product with Id: " + id)
+          new ProductNotFoundException("No product with Id: " + id)
         );
 
     return ProductMapper.toProductWithCategory(product);

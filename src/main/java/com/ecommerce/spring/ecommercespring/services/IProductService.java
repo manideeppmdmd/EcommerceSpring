@@ -8,9 +8,9 @@ import java.util.List;
 public interface IProductService {
   List<ProductDTO> getAllProducts() throws IOException;
 
-  ProductDTO getProduct(Long id) throws IOException;
+  ProductDTO getProduct(Long id);
 
-  ProductDTO create(ProductDTO dto) throws IOException;
+  ProductDTO create(ProductDTO dto);
 
-  ProductWithCategoryDTO getProductWithCategory(Long id) throws Exception;
+  ProductWithCategoryDTO getProductWithCategory(Long id);
 }

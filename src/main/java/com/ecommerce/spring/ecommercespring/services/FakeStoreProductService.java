@@ -22,12 +22,13 @@ public class FakeStoreProductService implements IProductService {
   }
 
   @Override
-  public ProductDTO getProduct(Long id) throws IOException {
-    return this.productGateway.getProduct(id);
+  public ProductDTO getProduct(Long id) {
+    // return this.productGateway.getProduct(id);
+    return null;
   }
 
   @Override
-  public ProductDTO create(ProductDTO dto) throws IOException {
+  public ProductDTO create(ProductDTO dto) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'create'");
   }

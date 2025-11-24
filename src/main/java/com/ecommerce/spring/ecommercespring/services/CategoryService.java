@@ -4,12 +4,11 @@ import com.ecommerce.spring.ecommercespring.dto.CategoryDTO;
 import com.ecommerce.spring.ecommercespring.dto.CategoryWithProductsDTO;
 import com.ecommerce.spring.ecommercespring.dto.ProductDTO;
 import com.ecommerce.spring.ecommercespring.entity.Category;
-import com.ecommerce.spring.ecommercespring.entity.Product;
+import com.ecommerce.spring.ecommercespring.exceptions.CategoryNotFoundException;
 import com.ecommerce.spring.ecommercespring.mappers.CategoryMapper;
 import com.ecommerce.spring.ecommercespring.mappers.ProductMapper;
 import com.ecommerce.spring.ecommercespring.repository.CategoryRepository;
 import com.ecommerce.spring.ecommercespring.repository.ProductRepository;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -44,18 +43,19 @@ public class CategoryService implements ICategoryService {
   }
 
   @Override
-  public CategoryDTO getByName(String name) throws IOException {
+  public CategoryDTO getByName(String name) {
     return this.repo.findByName(name)
       .map(CategoryMapper::toDto)
-      .orElseThrow(() -> new IOException("No category with give name"));
+      .orElseThrow(() ->
+        new CategoryNotFoundException("No category with give name")
+      );
   }
 
   @Override
-  public CategoryWithProductsDTO getCategoryWithProducts(Long id)
-    throws Exception {
+  public CategoryWithProductsDTO getCategoryWithProducts(Long id) {
     Category category =
       this.repo.findById(id).orElseThrow(() ->
-          new Exception("No category with Id: " + id)
+          new CategoryNotFoundException("No category with Id: " + id)
         );
 
     List<ProductDTO> products =

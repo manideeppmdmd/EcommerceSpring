@@ -2,7 +2,6 @@ package com.ecommerce.spring.ecommercespring.services;
 
 import com.ecommerce.spring.ecommercespring.dto.CategoryDTO;
 import com.ecommerce.spring.ecommercespring.dto.CategoryWithProductsDTO;
-import java.io.IOException;
 import java.util.List;
 
 public interface ICategoryService {
@@ -10,7 +9,7 @@ public interface ICategoryService {
 
   CategoryDTO createCategory(CategoryDTO category);
 
-  CategoryDTO getByName(String name) throws IOException;
+  CategoryDTO getByName(String name);
 
-  CategoryWithProductsDTO getCategoryWithProducts(Long id) throws Exception;
+  CategoryWithProductsDTO getCategoryWithProducts(Long id);
 }
